@@ -1,0 +1,10 @@
+{TODO 2 : Zrobiæ obs³ugê grup}
+{DONE 1 : Zrobiæ zapisywanie listy do XML}
+{DONE -oEGG : Zrobiæ obs³ugê ³adowania listy z XML}
+{DONE : Odbieranie bardzo du¿ych pakietów. Sprawdzimy jak¹ wartoœæ ma length i pobieramy dopóki dane siê skoñcz¹.}
+{DONE -oTEasyGGBase : Implementacja algorytmu Deflate i Inflate}
+{DONE 1 -oTEasyGGBase : Zrobiæ obs³ugê d³ugich wiadomoœci}
+{DONE 1 -oDemo app : Coœ nie tak z opisami na liœcie}
+{DONE 1 : Poprawiæ kodowanie opisów}
+{TODO 1  -oEGGBase : Zrobiæ obs³ugê listy kontaktów powy¿ej 400}
+{DONE 1 -oEGGBase : Zrobiæ jak¹œ klasê do obs³ugi u¿ytkowników}

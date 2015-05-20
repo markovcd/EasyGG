@@ -1,0 +1,44 @@
+package EasyGG;
+
+{$R *.res}
+{$ALIGN 8}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO ON}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS ON}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION ON}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO ON}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES OFF}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST OFF}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DESCRIPTION 'EasyGG'}
+{$IMPLICITBUILD OFF}
+{%TogetherDiagram 'ModelSupport_EasyGG\default.txaPackage'}
+
+requires
+  rtl,
+  vcl,
+  xmlrtl;
+
+contains
+  EGG in 'EGG.pas',
+  EGGBase in 'EGGBase.pas',
+  EGGConsts in 'EGGConsts.pas',
+  EGGFuncts in 'EGGFuncts.pas',
+  Base64 in 'DCPcrypt\Base64.pas',
+  DCPcrypt in 'DCPcrypt\DCPcrypt.pas',
+  SHA1 in 'DCPcrypt\SHA1.pas',
+  IdleTimer in 'IdleTimer.pas';
+
+end.

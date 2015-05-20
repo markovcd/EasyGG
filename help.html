@@ -1,0 +1,419 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title>Pomoc TEasyGG</title>
+
+<script language="javascript">
+  function toggleDiv(divid){
+    if(document.getElementById(divid).style.display == 'none'){
+      document.getElementById(divid).style.display = 'block';
+    }else{
+      document.getElementById(divid).style.display = 'none';
+    }
+  }
+</script>
+
+
+</head>
+
+<body>
+<h3>TEasyGG</h3>
+Hierarchia klas: TEasyGG -> TEasyGGBase -> TGGSocket -> TCustomSocket -> TAbstractSocket -> TComponent -> TPersistent -> TObject <br />
+Glówna klasa. Zawiera wszystkie niezbedne funkcje do laczenia sie z serwerem Gadu-Gadu.
+<ol type="I">
+	<li>W&#322;a&#347;ciwo&#347;&#263;i
+		<ol>
+			<li>
+				<a href="javascript:;" onmousedown="toggleDiv('TEasyGG_AutoHost');">AutoHost</a>
+				<div id="TEasyGG_AutoHost" style="display:none">Wlasciwosc typu Boolean, do ocztytu i zapisu. Jezeli wartosc jest True to 
+				komponent pobierze dostepny adres IP i port serwera GG.
+				Pola Host i Port nie sa wtedy wymagane.</div>
+			</li>
+			<li>
+				<a href="javascript:;" onmousedown="toggleDiv('TEasyGG_Description');">Description</a>
+				<div id="TEasyGG_Description" style="display:none">Wlasciwosc typu ShortString, do ocztytu i zapisu. 
+				Ustawia i przechowywuje opis uzytkownika.</div>
+			</li>
+			<li>
+				<a href="javascript:;" onmousedown="toggleDiv('TEasyGG_FriendsOnly');">FriendsOnly</a>
+				<div id="TEasyGG_FriendsOnly" style="display:none">Wlasciwosc typu Boolean, do ocztytu i zapisu. 
+				Jezeli ma wartosc True to klient jest w trybie tylko dla przyjaciól - 
+				to znaczy, ze nie bedzie otrzymywac wiadomosci od osób spoza listy.</div>
+			</li>
+			<li>
+				<a href="javascript:;" onmousedown="toggleDiv('TEasyGG_GetMsgFromBlocked');">GetMsgFromBlocked</a>
+				<div id="TEasyGG_GetMsgFromBlocked" style="display:none">Wlasciwosc typu Boolean, do ocztytu i zapisu. Jezeli wartosc jest True to 
+				zostanie wywolane zdarzenie OnReceiveMsg bez wzgledu czy otrzymujemy wiadomosc od kontaktu zablokowanego.</div>
+			</li>
+			<li>
+				<a href="javascript:;" onmousedown="toggleDiv('TEasyGG_Host');">Host</a>
+				<div id="TEasyGG_Host" style="display:none">Wlasciwosc typu String, do ocztytu i zapisu. 
+				IP serwera Gadu-Gadu. W przypadku, gdy AutoHost = True pole to nie jest wymagane.</div>
+			</li>
+			<li>
+				<a href="javascript:;" onmousedown="toggleDiv('TEasyGG_ImageSize');">ImageSize</a>
+				<div id="TEasyGG_ImageSize" style="display:none">Wlasciwosc typu Byte, do ocztytu i zapisu. 
+				Maksymalny rozmiar obrazka w kilobajtach. Gdy jest zmieniany podczas polaczenia to przechowywana wartosc sie zmienia,
+				jednak nie ma to wplywu na to polaczenie.</div>
+			</li>
+			<li>
+				<a href="javascript:;" onmousedown="toggleDiv('TEasyGG_Loggedin');">Loggedin</a>
+				<div id="TEasyGG_Loggedin" style="display:none">Wlasciwosc typu Boolean, tylko do odczytu.
+				Wynosi True jezeli uzytkownik zalogowany, w przeciwnym wypadku ma wartosc False.</div>
+			</li>
+			<li>
+				<a href="javascript:;" onmousedown="toggleDiv('TEasyGG_Password');">Password</a>
+				<div id="TEasyGG_Password" style="display:none">Wlasciwosc typu String, do ocztytu i zapisu. 
+				Haslo uzytkownika. Gdy jest zmieniane podczas polaczenia to przechowywana wartosc sie zmienia,
+				jednak nie ma to wplywu na to polaczenie.</div>
+			</li>
+			<li>
+				<a href="javascript:;" onmousedown="toggleDiv('TEasyGG_Port');">Port</a>
+				<div id="TEasyGG_Port" style="display:none">Wlasciwosc typu Integer, do ocztytu i zapisu. 
+				Port serwera Gadu-Gadu. W przypadku, gdy AutoHost = True pole to nie jest wymagane.</div>
+			</li>
+			<li>
+				<a href="javascript:;" onmousedown="toggleDiv('TEasyGG_ReceiveURLS');">ReceiveURLS</a>
+				<div id="TEasyGG_ReceiveURLS" style="display:none">Wlasciwosc typu Boolean, do ocztytu i zapisu. 
+				Jezeli ma wartosc False to serwer nie bedzie przysylal linków od osób spoza listy kontaktów.</div>
+			</li>
+			<li>
+				<a href="javascript:;" onmousedown="toggleDiv('TEasyGG_Status');">Status</a>
+				<div id="TEasyGG_Status" style="display:none">Wlasciwosc typu TUserStatus, do ocztytu i zapisu. 
+				Ustawia obecny status uzytkownika. Mozliwe wartosci to:
+				<ul>
+				  <li>usGGWithMe - PoGGadaj ze mna</li>
+				  <li>usAvailable - Dostepny</li>
+				  <li>usNotAvailable - Niedostepny</li>
+				  <li>usBusy - Zaraz wracam</li>
+				  <li>usDND - Nie przeszkadzac</li>
+				  <li>usInvisible - Niewidoczny</li>
+				</ul>
+				W przypadku próby ustawienia usBlocked, nastapi blad typu EGGError.
+				W przypadku wybrania stanu usNotAvailable nastapi zakonczenie polaczenia, kazdy inny stan
+				powoduje polaczenie sie z serwerem. 
+				</div>
+			</li>
+			<li>
+				<a href="javascript:;" onmousedown="toggleDiv('TEasyGG_UID');">UID</a>
+				<div id="TEasyGG_UID" style="display:none">Wlasciwosc typu Cardinal, do ocztytu i zapisu. 
+				Numer uzytkownika. Gdy jest zmieniane podczas polaczenia to przechowywana wartosc sie zmienia,
+				jednak nie ma to wplywu na to polaczenie.</div>
+			</li>
+			<li>
+				<a href="javascript:;" onmousedown="toggleDiv('TEasyGG_Users');">Users</a>
+				<div id="TEasyGG_Users" style="display:none">Obiekt typu TUsers, tylko do odczytu.
+				Zawiera liste kontaktów.</div>
+			</li>
+		</ol></li>
+	<li>Metody
+		<ol>
+			<li>
+				<a href="javascript:;" onmousedown="toggleDiv('TEasyGG_Conference');">Conference</a>
+				<div id="TEasyGG_Conference" style="display:none"><h5>procedure Conference(ARecipients: array of LongWord; AHTMLMsg, APlainMsg, AAttributes: String);</h5>
+				Procedura wysyla konferencje do uzytkowników podanych w tablicy ARecipients. AHTMLMsg to wiadomosc 
+				sformatowana HTMLem, natomiast APlainMsg to wiadomosc sformatowana flagami AAttributes.
+				Procedura jest trudna w uzyciu ale daje duza kontrole.
+				Wiecej o formatowaniu <a href="http://toxygen.net/libgadu/protocol/#ch1.6.2">tutaj</a> (rozdzial 1.6.2).</div>
+			</li>
+			<li>
+				<a href="javascript:;" onmousedown="toggleDiv('TEasyGG_ConferencePlain');">ConferencePlain</a>
+				<div id="TEasyGG_ConferencePlain" style="display:none"><h5>procedure ConferencePlain(ARecipients: array of LongWord; AMsg: String);</h5>
+				Procedura wysyla konferencje do podanych ID o tresci AMsg. Bez formatowania.</div>
+			</li>
+			<li>
+				<a href="javascript:;" onmousedown="toggleDiv('TEasyGG_ContactsFromFile');">ContactsFromFile</a>
+				<div id="TEasyGG_ContactsFromFile" style="display:none"><h5>procedure ContactsFromFile(FileName: String);</h5>
+				Procedura importuje liste kontaktów z pliku XML o sciezce FileName. Zadne obecne kontakty nie sa kasowane, 
+				nadpisywane sa jedynie zduplikowane dane. Po skonczonym imporcie nastepuje zdarzenie OnImportList.</div>
+			</li>
+			<li>
+				<a href="javascript:;" onmousedown="toggleDiv('TEasyGG_ContactsFromServer');">ContactsFromServer</a>
+				<div id="TEasyGG_ContactsFromServer" style="display:none"><h5>procedure ContactsFromServer;</h5>
+				Procedura importuje liste kontaktów z serwera Gadu-Gadu. Wymagane jest aktywne polaczenie z serwerem. Zadne obecne kontakty nie sa kasowane, 
+				nadpisywane sa jedynie zduplikowane dane. Po skonczonym imporcie nastepuje zdarzenie OnImportList (nie nastapi to w przypadku braku polaczenia).</div>
+			</li>
+			<li>
+				<a href="javascript:;" onmousedown="toggleDiv('TEasyGG_ContactsFromString');">ContactsFromString</a>
+				<div id="TEasyGG_ContactsFromString" style="display:none"><h5>procedure ContactsFromString(XML: String);</h5>
+				Procedura importuje liste kontaktów z ciagu znaków XML. Zadne obecne kontakty nie sa kasowane, 
+				nadpisywane sa jedynie zduplikowane dane. Po skonczonym imporcie nastepuje zdarzenie OnImportList.</div>
+			</li>
+			<li>
+				<a href="javascript:;" onmousedown="toggleDiv('TEasyGG_ContactsToFile');">ContactsToFile</a>
+				<div id="TEasyGG_ContactsToFile" style="display:none"><h5>procedure ContactsToFile(FileName: String);</h5>
+				Procedura eksportuje liste kontaktów do pliku XML o sciezce FileName.</div>
+			</li>
+			<li>
+				<a href="javascript:;" onmousedown="toggleDiv('TEasyGG_ContactsToServer');">ContactsToServer</a>
+				<div id="TEasyGG_ContactsToServer" style="display:none"><h5>procedure ContactsToServer;</h5>
+				Procedura eksportuje liste kontaktów na serwer Gadu-Gadu. Wymagane jest aktywne polaczenie z serwerem. Po skonczonym 
+				eksporcie nastepuje zdarzenie OnExportList (nie nastapi to w przypadku braku polaczenia).</div>
+			</li>
+			<li>
+				<a href="javascript:;" onmousedown="toggleDiv('TEasyGG_ContactsToString');">ContactsToString</a>
+				<div id="TEasyGG_ContactsToString" style="display:none"><h5>function ContactsToString: String;</h5>
+				Funckja eksportuje liste kontaktów do ciagu znaków w formacie XML.</div>
+			</li>
+			<li>
+				<a href="javascript:;" onmousedown="toggleDiv('TEasyGG_SendMsg');">SendMsg</a>
+				<div id="TEasyGG_SendMsg" style="display:none"><h5>procedure SendMsg(AUID: LongWord; AHTMLMsg, APlainMsg, AAttributes: String);</h5>
+				Procedura wysyla do uzytkownika o podanym ID formatowana wiadomosc.
+				AHTMLMsg to wiadomosc sformatowana HTMLem, natomiast APlainMsg to wiadomosc sformatowana flagami AAttributes.
+				Procedura jest trudna w uzyciu ale daje duza kontrole.
+				Wiecej o formatowaniu <a href="http://toxygen.net/libgadu/protocol/#ch1.6.2">tutaj</a> (rozdzial 1.6.2).</div>
+			</li>
+			<li>
+				<a href="javascript:;" onmousedown="toggleDiv('TEasyGG_SendMsgPlain');">SendMsgPlain</a>
+				<div id="TEasyGG_SendMsgPlain" style="display:none"><h5>procedure SendMsgPlain(AUID: LongWord; AMsg: String);</h5>
+				Procedura wysyla tekst do podanego ID uzytkownika o tresci AMsg.</div>
+			</li>
+		</ol></li>
+	<li>Zdarzenia
+		<ol>
+			<li>
+				<a href="javascript:;" onmousedown="toggleDiv('TEasyGG_OnAddUser');">OnAddUser</a>
+				<div id="TEasyGG_OnAddUser" style="display:none"><h5>OnAddUser(Sender: TObject; User: TUser)</h5>
+				Zdarzenie wywolane jest, gdy dodano nowego uzytkownika na liste kontaktów.</div>
+			</li>
+			<li>
+				<a href="javascript:;" onmousedown="toggleDiv('TEasyGG_OnConnect');">OnConnect</a>
+				<div id="TEasyGG_OnConnect" style="display:none"><h5>OnConnect(Sender: TObject; Socket: TCustomWinSocket)</h5>
+				Zdarzenie nalezace do TClientSocket. Wywolane jest tuz po ustanowienia polaczenia z serwerem.</div>
+			</li>
+			<li>
+				<a href="javascript:;" onmousedown="toggleDiv('TEasyGG_OnConnecting');">OnConnecting</a>
+				<div id="TEasyGG_OnConnecting" style="display:none"><h5>OnConnecting(Sender: TObject; Socket: TCustomWinSocket)</h5>
+				Zdarzenie nalezace do TClientSocket. Wywolane jest tuz przed polaczeniem sie z serwerem.</div>
+			</li>
+			<li>
+				<a href="javascript:;" onmousedown="toggleDiv('TEasyGG_OnDeleteUser');">OnDeleteUser</a>
+				<div id="TEasyGG_OnDeleteUser" style="display:none"><h5>OnDeleteUser(Sender: TObject; User: TUser)</h5>
+				Zdarzenie wywolane jest tuz przed usunieciem uzytkownika z listy.</div>
+			</li>
+			<li>
+				<a href="javascript:;" onmousedown="toggleDiv('TEasyGG_OnDisconnect');">OnDisconnect</a>
+				<div id="TEasyGG_OnDisconnect" style="display:none"><h5>OnDisconnect(Sender: TObject; Socket: TCustomWinSocket)</h5>
+				Zdarzenie nalezace do TClientSocket. Wywolane jest tuz po rozlaczeniu sie z serwerem.</div>
+			</li>
+			<li>
+				<a href="javascript:;" onmousedown="toggleDiv('TEasyGG_OnDisconnecting');">OnDisconnecting</a>
+				<div id="TEasyGG_OnDisconnecting" style="display:none"><h5>OnDisconnecting(Sender: TObject)</h5>
+				Zdarzenie wywolane jest, gdy serwer chce nas rozlaczyc. Dzieje sie to poniewaz próbowano zbyt wiele 
+				razy polaczyc sie z nieprawidlowym haslem, lub gdy równoczesnie polaczy sie drugi klient z tym samym numerem.</div>
+			</li>
+			<li>
+				<a href="javascript:;" onmousedown="toggleDiv('TEasyGG_OnExportList');">OnExportList</a>
+				<div id="TEasyGG_OnExportList" style="display:none"><h5>OnExportList(Sender: TObject)</h5>
+				Zdarzenie wywolane jest tuz po eksporcie listy kontaktów na serwer. Nie wywoluja go metody ContactsToFile i ContactsToString.</div>
+			</li>
+			<li>
+				<a href="javascript:;" onmousedown="toggleDiv('TEasyGG_OnImportList');">OnImportList</a>
+				<div id="TEasyGG_OnImportList" style="display:none"><h5>OnImporttList(Sender: TObject)</h5>
+				Zdarzenie wywolane jest tuz po imporcie listy kontaktów. Obejmuja je metody ContactsFromFile, ContactsFromString oraz ContactsFromServer.</div>
+			</li>
+			<li>
+				<a href="javascript:;" onmousedown="toggleDiv('TEasyGG_OnLoginFailed');">OnLoginFailed</a>
+				<div id="TEasyGG_OnLoginFailed" style="display:none"><h5>OnLoginFailed(Sender: TObject)</h5>
+				Zdarzenie wywolane jest, gdy logowanie sie nie powiodlo. Najczesciej jest to zwiazane z blednym haslem lub numerem.</div>
+			</li>
+			<li>
+				<a href="javascript:;" onmousedown="toggleDiv('TEasyGG_OnLoginOK');">OnLoginOK</a>
+				<div id="TEasyGG_OnLoginOK" style="display:none"><h5>OnLoginOK(Sender: TObject)</h5>
+				Zdarzenie wywolane jest, gdy logowanie zostalo zakonczone sukcesem.</div>
+			</li>
+			<li>
+				<a href="javascript:;" onmousedown="toggleDiv('TEasyGG_OnReceiveMsg');">OnReceiveMsg</a>
+				<div id="TEasyGG_OnReceiveMsg" style="display:none"><h5>OnReceiveMsg(Sender: TObject; UID: Cardinal; HTMLMessage,PlainMessage, Attributes: String; Time: TDateTime; Conference: array of Cardinal)</h5>
+				Zdarzenie wywolane jest, gdy nadejdzie nowa wiadomosc. UID to numer uzytkownika, od którego 
+				otrzymalismy wiadomosc. HTMLMessage to wiadomosc formatowana HTMLem, a PlainMessage to czysty tekst. Attributes to flagi formatowania. 
+				Wiecej o flagach <a href="http://toxygen.net/libgadu/protocol/#ch1.6.2.2">tutaj</a> (rozdzial 1.6.2.2).
+				Time to czas, w którym zostala wyslana wiadomosc. Conference to tablica numerów konferencji 
+				(oprócz numeru uzytkownika, od którego dostalismy wiadomosc).</div>
+			</li>
+			<li>
+				<a href="javascript:;" onmousedown="toggleDiv('TEasyGG_OnSendMsg');">OnSendMsg</a>
+				<div id="TEasyGG_OnSendMsg" style="display:none"><h5>OnSendMsg(Sender: TObject; UID: Cardinal)</h5>
+				Zdarzenie wywolane jest, gdy dojdzie potwierdzenie o dostarczeniu wiadomosci 
+				do uzytkownika o numerze UID. Nie wystepuje ono wiec, gdy nie ma polaczenia z serwerem.</div>
+			</li>
+			<li>
+				<a href="javascript:;" onmousedown="toggleDiv('TEasyGG_OnUserStatus');">OnUserStatus</a>
+				<div id="TEasyGG_OnUserStatus" style="display:none"><h5>OnUserStatus(Sender: TObject; User: TUser)</h5>
+				Zdarzenie wywolane jest, gdy uzytkownik User zmieni stan.</div>
+			</li>
+		</ol></li>
+</ol>
+<h3>TUsers</h3>
+Hierarchia klas: TUsers -> TList -> TObject<br />
+Lista kontaktów. Nie nalezy tworzyc, ani niszczyc tej klasy samodzielnie. Robione jest to automatycznie z poziomu klasy TEasyGG (wlasciwosc Users).
+<ol type="I">
+	<li>W&#322;a&#347;ciwo&#347;&#263;i
+		<ol>
+			<li>
+				<a href="javascript:;" onmousedown="toggleDiv('TUsers_Count');">Count</a>
+				<div id="TUsers_Count" style="display:none">Wlasciwosc typu Integer, tylko do odczytu. Zawiera obecna liczbe uzytkowników na liscie kontaktów.</div>
+			</li>
+			<li>
+				<a href="javascript:;" onmousedown="toggleDiv('TUsers_Items');">Items</a>
+				<div id="TUsers_Items" style="display:none">Tablica klas TUser, tylko do odczytu. Zwraca konkretnego uzytkownika na liscie kontaktów.</div>
+			</li>
+		</ol></li>
+	<li>Metody
+		<ol>
+			<li>
+				<a href="javascript:;" onmousedown="toggleDiv('TUsers_Add');">Add</a>
+				<div id="TUsers_Add" style="display:none"><h5>function Add(AUID: LongWord): Integer;</h5>
+				Funkcja dodaje nowego uzytkownika o podanym numerze na liste kontaktów. Funkcja zwraca indeks nowo 
+				dodanego uzytkownika. Po dodaniu wywolane jest zdarzenie OnAddUser klasy TEasyGG.</div>
+			</li>
+			<li>
+				<a href="javascript:;" onmousedown="toggleDiv('TUsers_Clear');">Clear</a>
+				<div id="TUsers_Clear" style="display:none"><h5>procedure Clear;</h5>
+				Procedura czysci zawartosc listy kontaktów. Dla kazdego usuwanego uzytkownika wywolywane jest zdarzenie OnDeleteUser klasy TEasyGG.</div>
+			</li>
+			<li>
+				<a href="javascript:;" onmousedown="toggleDiv('TUsers_Delete');">Delete</a>
+				<div id="TUsers_Delete" style="display:none"><h5>procedure Delete(Index: Integer);</h5>
+				Procedura usuwa uzytkownika o podanym indeksie z listy kontaktów. Tuz przed jego usunieciem jest wywolane zdarzenie OnDeleteUser klasy TEasyGG.</div>
+			</li>
+			<li>
+				<a href="javascript:;" onmousedown="toggleDiv('TUsers_IndexOfName');">IndexOfName</a>
+				<div id="TUsers_IndexOfName" style="display:none"><h5>function IndexOfName(AName: ShortString): Integer;</h5>
+				Funkcja zwraca pierwszy indeks uzytkownika o podanej nazwie.</div>
+			</li>
+			<li>
+				<a href="javascript:;" onmousedown="toggleDiv('TUsers_IndexOfUID');">IndexOfUID</a>
+				<div id="TUsers_IndexOfUID" style="display:none"><h5>function IndexOfUID(AUID: LongWord): Integer;</h5>
+				Funkcja zwraca indeks uzytkownika o podanym numerze.</div>
+			</li>
+		</ol></li>
+</ol>
+<h3>TUser</h3>
+Hierarchia klas: TUser -> TObject <br />
+Klasa przechowuje wszystkie dane o uzytkowniku. Nie nalezy tworzyc, ani niszczyc jej samodzielnie. Zamiast tego nalezy uzywac metod Add i Delete klasy TUsers.
+<ol type="I">
+	<li>W&#322;a&#347;ciwo&#347;&#263;i
+		<ol>
+			<li>
+				<a href="javascript:;" onmousedown="toggleDiv('TUser_Birth');">Birth</a>
+				<div id="TUser_Birth" style="display:none">Wlasciwosc typu ShortString, do ocztytu i zapisu. 
+				Data urodzenia wg. formatu DD miesiac RRRR (np. "14 luty 1987").</div>
+			</li>
+			<li>
+				<a href="javascript:;" onmousedown="toggleDiv('TUser_Blocked');">Blocked</a>
+				<div id="TUser_Blocked" style="display:none">Wlasciwosc typu Boolean, do odczytu i zapisu.
+				Ustaw na True, jezeli chcesz zablokowac uzytkownika, False jezeli odblokowac.</div>
+			</li>
+			<li>
+				<a href="javascript:;" onmousedown="toggleDiv('TUser_City');">City</a>
+				<div id="TUser_City" style="display:none">Wlasciwosc typu ShortString, do ocztytu i zapisu. 
+				Miasto.</div>
+			</li>
+			<li>
+				<a href="javascript:;" onmousedown="toggleDiv('TUser_Description');">Description</a>
+				<div id="TUser_Description" style="display:none">Wlasciwosc typu ShortString, tylko do odczytu. 
+				Przechowywuje obecny opis uzytkownika.</div>
+			</li>
+			<li>
+				<a href="javascript:;" onmousedown="toggleDiv('TUser_Email');">Email</a>
+				<div id="TUser_Email" style="display:none">Wlasciwosc typu ShortString, tylko do odczytu. Email.</div>
+			</li>
+			<li>
+				<a href="javascript:;" onmousedown="toggleDiv('TUser_FirstName');">FirstName</a>
+				<div id="TUser_FirstName" style="display:none">Wlasciwosc typu ShortString, do ocztytu i zapisu. 
+				Imie.</div>
+			</li>
+			<li>
+				<a href="javascript:;" onmousedown="toggleDiv('TUser_FriendsOnly');">FriendsOnly</a>
+				<div id="TUser_FriendsOnly" style="display:none">Wlasciwosc typu Boolean, tylko do odczytu. 
+				Jezeli ma wartosc True to uzytkownik ma wlaczony tryb tylko dla znajomych.</div>
+			</li>
+			<li>
+				<a href="javascript:;" onmousedown="toggleDiv('TUser_Gender');">Gender</a>
+				<div id="TUser_Gender" style="display:none">Wlasciwosc typu TGender, do ocztytu i zapisu. 
+				Plec. Przyjmuje wartosci:
+				<ul>
+					<li>gUnknown - nieznana plec</li>
+					<li>gFemale - kobieta</li>
+					<li>gMale - mezczyzna</li>
+					
+				</ul></div>
+			</li>
+			<li>
+				<a href="javascript:;" onmousedown="toggleDiv('TUser_HomePhone');">HomePhone</a>
+				<div id="TUser_HomePhone" style="display:none">Wlasciwosc typu ShortString, do ocztytu i zapisu. Telefon domowy.</div>
+			</li>
+			<li>
+				<a href="javascript:;" onmousedown="toggleDiv('TUser_ImageSize');">ImageSize</a>
+				<div id="TUser_ImageSize" style="display:none">Wlasciwosc typu Byte, tylko do odczytu. 
+				Maksymalny rozmiar obrazka w kilobajtach.</div>
+			</li>
+			<li>
+				<a href="javascript:;" onmousedown="toggleDiv('TUser_ImageStatus');">ImageStatus</a>
+				<div id="TUser_ImageStatus" style="display:none">Wlasciwosc typu Boolean, tylko do odczytu. 
+				Jezeli ma wartosc True, to znaczy, ze uzytkownik ma ustawiony opis graficzny.</div>
+			</li>
+			<li>
+				<a href="javascript:;" onmousedown="toggleDiv('TUser_LastName');">LastName</a>
+				<div id="TUser_LastName" style="display:none">Wlasciwosc typu ShortString, do ocztytu i zapisu. Nazwisko.</div>
+			</li>
+			<li>
+				<a href="javascript:;" onmousedown="toggleDiv('TUser_MobilePhone');">MobilePhone</a>
+				<div id="TUser_MobilePhone" style="display:none">Wlasciwosc typu ShortString, do ocztytu i zapisu. Telefon komórkowy.</div>
+			</li>
+			<li>
+				<a href="javascript:;" onmousedown="toggleDiv('TUser_Name');">Name</a>
+				<div id="TUser_Name" style="display:none">Wlasciwosc typu ShortString, do ocztytu i zapisu. 
+				Nazwa uzytkownika na liscie.</div>
+			</li>
+			<li>
+				<a href="javascript:;" onmousedown="toggleDiv('TUser_Province');">Province</a>
+				<div id="TUser_Province" style="display:none">Wlasciwosc typu ShortString, do ocztytu i zapisu. Województwo.</div>
+			</li>
+			<li>
+				<a href="javascript:;" onmousedown="toggleDiv('TUser_Status');">Status</a>
+				<div id="TUser_Status" style="display:none">Wlasciwosc typu TUserStatus, tylko do odczytu. 
+				Aktualny status uzytkownika. Mozliwe wartosci to:
+				<ul>
+					<li>usGGWithMe - PoGGadaj ze mna</li>
+					<li>usAvailable - Dostepny</li>
+					<li>usNotAvailable - Niedostepny</li>
+					<li>usBusy - Zaraz wracam</li>
+					<li>usDND - Nie przeszkadzac</li>
+					<li>usBlocked - Zablokowany</li>
+				</ul></div>
+			</li>
+			<li>
+				<a href="javascript:;" onmousedown="toggleDiv('TUser_UID');">UID</a>
+				<div id="TUser_UID" style="display:none">Wlasciwosc typu Cardinal, do odczytu i zapisu. 
+				Przechowywuje i ustawia numer uzytkownika na liscie kontaktów.</div>
+			</li>
+			<li>
+				<a href="javascript:;" onmousedown="toggleDiv('TUser_WWWAddress');">WWWAddress</a>
+				<div id="TUser_WWWAddress" style="display:none">Wlasciwosc typu ShortString, do ocztytu i zapisu. 
+				Strona domowa.</div>
+			</li>
+		</ol></li>
+	<li>Metody
+		<ol>
+			<li>
+				<a href="javascript:;" onmousedown="toggleDiv('TUser_SendMsg');">SendMsg</a>
+				<div id="TUser_SendMsg" style="display:none"><h5>procedure SendMsg(AHTMLMsg, APlainMsg, AAttributes: String);</h5>
+				Procedura wysyla do uzytkownika formatowana wiadomosc.
+				AHTMLMsg to wiadomosc sformatowana HTMLem, natomiast APlainMsg to wiadomosc sformatowana flagami AAttributes.
+				Procedura jest trudna w uzyciu ale daje duza kontrole.
+				Wiecej o formatowaniu <a href="http://toxygen.net/libgadu/protocol/#ch1.6.2">tutaj</a> (rozdzial 1.6.2).</div></div>
+			</li>
+			<li>
+				<a href="javascript:;" onmousedown="toggleDiv('TUser_SendMsgPlain');">SendMsgPlain</a>
+				<div id="TUser_SendMsgPlain" style="display:none"><h5>procedure SendMsgPlain(AMsg: String);</h5>
+				Procedura wysyla tekst do uzytkownika o tresci AMsg.</div>
+			</li>
+		</ol></li>
+</ol>
+
+
+</body>
+</html>
